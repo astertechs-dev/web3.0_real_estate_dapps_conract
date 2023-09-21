@@ -1,7 +1,19 @@
 require("@matterlabs/hardhat-zksync-solc");
 
 /** @type import('hardhat/config').HardhatUserConfig */
+/* 
+ * TODO: Please prepare a wallet such as Metamask and enter the private key value associated with your account.
+ * Note: Please note that in this repository, the smart contract is deployed on the "Polygon Mumbai" network.
+ *       Therefore, the file configuration is set to values assuming "Polygon Mumbai". 
+ *       For details on the configuration method, please refer to the following URL.
+ *       - https://www.youtube.com/watch?v=GY0qBXjqGlw&t=295s
+ *       - https://www.coincarp.com/ja/chainlist/mumbai/
+ *       - https://note.com/yutakikuchi/n/n2da9d00772fe
+ */
+const PRIVATE_KEY = ''
+const RPC_URL = 'https://rpc.ankr.com/polygon_mumbai'
 module.exports = {
+  defaultNetwork: "polygon_mumbai",
   zksolc: {
     version: "1.3.9",
     compilerSource: "binary",
@@ -12,6 +24,13 @@ module.exports = {
     },
   },
   networks: {
+    hardhat: {
+      chainId: 80001,
+    },
+    polygon_mumbai: {
+      url: RPC_URL,
+      accounts: [`0x${PRIVATE_KEY}`]
+    },
     zksync_testnet: {
       url: "https://zksync2-testnet.zksync.dev",
       ethNetwork: "goerli",
